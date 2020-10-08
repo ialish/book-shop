@@ -2,11 +2,16 @@ const Book = require('../models/book');
 const Author = require('../models/author');
 const Publisher = require('../models/publisher');
 
-const create = async (req, res) => {
+const createBook = (req, res) => {
 	let authorId = null;
 	let publisherId = null;
 
-	Author.findOne({ name: req.body.author }, async (err, matchedAuthor) => {
+	// Check submission
+	if (!req.body.book || !req.body.author || !req.body.publisher) {
+		return res.send({ error: 'Data is missing' });
+	};
+
+	Author.findOne({ name: req.body.author }, (err, matchedAuthor) => {
 		if (err) throw err;
 		if (matchedAuthor) {
 			authorId = matchedAuthor._id;
@@ -17,7 +22,7 @@ const create = async (req, res) => {
 		};
 	});
 
-	Publisher.findOne({ name: req.body.publisher }, async (err, matchedPublisher) => {
+	Publisher.findOne({ name: req.body.publisher }, (err, matchedPublisher) => {
 		if (err) throw err;
 		if (matchedPublisher) {
 			publisherId = matchedPublisher._id;
@@ -28,7 +33,7 @@ const create = async (req, res) => {
 		};
 	});
 
-	Book.findOne({ name: req.body.book }, async (err, matchedBook) => {
+	Book.findOne({ name: req.body.book }, (err, matchedBook) => {
 		if (err) throw err;
 		if (!matchedBook) {
 			const book = new Book({
@@ -39,18 +44,20 @@ const create = async (req, res) => {
 			book.save(err => { if (err) throw err });
 		};
 	});
+
+	res.send({ message: 'Saved successfully' });
 };
 
-// const update = async (req, res) => {
+// const updateBook = (req, res) => {
 	
 // };
 
-// const delete = async (req, res) => {
+const deleteBook = (req, res) => {
 	
-// };
+};
 
 module.exports = {
-	create,
-	// update,
-	// delete
+	createBook,
+	// updateBook,
+	deleteBook
 };

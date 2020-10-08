@@ -4,8 +4,8 @@ const router = express.Router();
 const adminController = require('../controllers/admin');
 
 router.route('/')
-	.post(adminController.create)
-	// .update(adminController.update)
-	// .delete(adminController.delete);
+	.post(adminController.createBook)
+	// .update(adminController.updateBook)
+	.delete(adminController.deleteBook);
 
 module.exports = router;
