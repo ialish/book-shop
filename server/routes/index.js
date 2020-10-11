@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res) => {
-	res.send('index');
-});
+const indexController = require('../controllers/index');
+
+router.get('/', indexController.bookList);
 
 module.exports = router;
