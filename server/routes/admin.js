@@ -5,7 +5,7 @@ const adminController = require('../controllers/admin');
 
 router.route('/')
 	.post(adminController.createBook)
-	// .update(adminController.updateBook)
+	.put(adminController.updateBook)
 	.delete(adminController.deleteBook);
 
 module.exports = router;

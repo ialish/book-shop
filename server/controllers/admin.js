@@ -48,16 +48,38 @@ const createBook = (req, res) => {
 	res.send({ message: 'Saved successfully' });
 };
 
-// const updateBook = (req, res) => {
+const updateBook = (req, res) => {
+	const { id } = req.body;
 	
-// };
+	// Check submission
+	if (!req.body.book || !req.body.author || !req.body.publisher) {
+		return res.send({ error: 'Data is missing' });
+	};
+
+	Book.findByIdAndUpdate(id, { name: req.body.book }, (err, book) => {
+		if (err) throw err;
+
+		Author.findByIdAndUpdate(book.author, { name: req.body.author }, err => {
+			if (err) throw err;
+		});
+	
+		Publisher.findByIdAndUpdate(book.publisher, { name: req.body.publisher }, err => {
+			if (err) throw err;
+		});
+
+		res.send({ message: 'Updated successfully' });
+	});
+};
 
 const deleteBook = (req, res) => {
-	
+	Book.deleteOne({ name: req.body.book }, err => {
+		if (err) throw err;
+		res.send({ message: 'Deleted successfully' });
+	});
 };
 
 module.exports = {
 	createBook,
-	// updateBook,
+	updateBook,
 	deleteBook
 };
