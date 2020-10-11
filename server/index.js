@@ -8,6 +8,7 @@ const indexRouter = require('./routes/index');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 const adminRouter = require('./routes/admin');
+const userRouter = require('./routes/user');
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -23,6 +24,7 @@ app.use('/', indexRouter);
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/admin', adminRouter);
+app.use('/user', userRouter);
 
 app.listen(port, () => {
 	console.log(`app listening at http://localhost:${port}`);
