@@ -25,6 +25,12 @@ const register = async (req, res) => {
 			if (err) throw err;
 			return res.json({ message: 'Registered successfully' });
 		});
+
+		const accessToken = jwt.sign(
+			{ username: user.username },
+			process.env.ACCESS_TOKEN_SECRET
+		);
+		return res.json({ accessToken });
 	});
 };
 
