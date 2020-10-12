@@ -5,7 +5,7 @@ const savePurchased = (req, res) => {
 	
 	User.updateOne({ username }, { "$push": { "purchasedBooks": purchasedId } }, (err) => {
 		if (err) throw err;
-		res.send({ message: 'Purchased successfully' });
+		res.json({ message: 'Purchased successfully' });
 	});
 };
 
@@ -26,7 +26,7 @@ const booksPurchased = (req, res) => {
 		})
 		.exec((err, book) => {
 			if (err) throw err;
-			res.send(book.purchasedBooks);
+			res.json(book.purchasedBooks);
 		});
 };
 

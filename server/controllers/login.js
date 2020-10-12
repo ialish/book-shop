@@ -7,7 +7,7 @@ const login = async (req, res) => {
 	
 	// Check submission
 	if (!username || !password) {
-		return res.send({ error: 'Data is missing' });
+		return res.json({ error: 'Data is missing' });
 	};
 
 	User.findOne({ username }, async (err, matchedUser) => {
@@ -15,7 +15,7 @@ const login = async (req, res) => {
 
 		// Check if username not exists
 		if (!matchedUser) {
-			return res.send({ error: 'Data is incorrect' });
+			return res.json({ error: 'Data is incorrect' });
 		};
 
 		const { hashedPassword } = matchedUser;
@@ -23,14 +23,14 @@ const login = async (req, res) => {
 		
 		// Check if password is correct
 		if (!isValid) {
-			return res.send({ error: 'Data is incorrect' });
+			return res.json({ error: 'Data is incorrect' });
 		};
 
 		const accessToken = jwt.sign(
 			{ username: matchedUser.username },
 			process.env.ACCESS_TOKEN_SECRET
 		);
-		return res.send({ accessToken });
+		return res.json({ accessToken });
 	});
 };
 

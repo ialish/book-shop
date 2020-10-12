@@ -6,7 +6,7 @@ const register = async (req, res) => {
 
 	// Check submission
 	if (!username || !password) {
-		return res.send({ error: 'Data is missing' });
+		return res.json({ error: 'Data is missing' });
 	};
 	
 	User.findOne({ username }, async (err, matchedUser) => {
@@ -14,7 +14,7 @@ const register = async (req, res) => {
 
 		// Check if username already exists
 		if (matchedUser) {
-			return res.send({ error: 'This username is already exists' });
+			return res.json({ error: 'This username is already exists' });
 		};
 		
 		const saltRounds = 10;
@@ -23,7 +23,7 @@ const register = async (req, res) => {
 	
 		user.save(err => {
 			if (err) throw err;
-			return res.send({ message: 'Registered successfully' });
+			return res.json({ message: 'Registered successfully' });
 		});
 	});
 };

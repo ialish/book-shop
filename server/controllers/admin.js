@@ -8,7 +8,7 @@ const createBook = (req, res) => {
 
 	// Check submission
 	if (!req.body.book || !req.body.author || !req.body.publisher) {
-		return res.send({ error: 'Data is missing' });
+		return res.json({ error: 'Data is missing' });
 	};
 
 	Author.findOne({ name: req.body.author }, (err, matchedAuthor) => {
@@ -45,7 +45,7 @@ const createBook = (req, res) => {
 		};
 	});
 
-	res.send({ message: 'Saved successfully' });
+	res.json({ message: 'Saved successfully' });
 };
 
 const updateBook = (req, res) => {
@@ -53,7 +53,7 @@ const updateBook = (req, res) => {
 	
 	// Check submission
 	if (!req.body.book || !req.body.author || !req.body.publisher) {
-		return res.send({ error: 'Data is missing' });
+		return res.json({ error: 'Data is missing' });
 	};
 
 	Book.findByIdAndUpdate(id, { name: req.body.book }, (err, book) => {
@@ -67,14 +67,14 @@ const updateBook = (req, res) => {
 			if (err) throw err;
 		});
 
-		res.send({ message: 'Updated successfully' });
+		res.json({ message: 'Updated successfully' });
 	});
 };
 
 const deleteBook = (req, res) => {
 	Book.deleteOne({ name: req.body.book }, err => {
 		if (err) throw err;
-		res.send({ message: 'Deleted successfully' });
+		res.json({ message: 'Deleted successfully' });
 	});
 };
 
