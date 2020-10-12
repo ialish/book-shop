@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
+import { Redirect, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Context from '../Context';
-import { Redirect, Link, useLocation } from 'react-router-dom';
 
 const SignInSignUp = () => {
 	const { pathname } = useLocation();

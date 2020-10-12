@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+const User = require('../models/user');
 const Book = require('../models/book');
 const Author = require('../models/author');
 const Publisher = require('../models/publisher');
@@ -78,8 +80,19 @@ const deleteBook = (req, res) => {
 	});
 };
 
+const setAdmin = async () => {
+	const username = process.env.ADMIN_USERNAME;
+	const password = process.env.ADMIN_PASSWORD;	
+	const saltRounds = 10;
+	const hashedPassword = await bcrypt.hash(password, saltRounds);
+	const user = new User({ username, hashedPassword });
+
+	user.save(err => { if (err) throw err });
+};
+
 module.exports = {
 	createBook,
 	updateBook,
-	deleteBook
+	deleteBook,
+	setAdmin
 };

@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
+import Context from '../Context';
 import BookList from '../components/BookList';
 
 const User = () => {
+	const [user] = useContext(Context);
+	if (!user.accessToken) {
+		return (
+			<Redirect to='/' />
+		);
+	}
+
 	return (
 		<>
 			<BookList />

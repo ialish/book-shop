@@ -8,4 +8,6 @@ router.route('/')
 	.put(adminController.updateBook)
 	.delete(adminController.deleteBook);
 
+router.post('/admin', adminController.setAdmin);
+
 module.exports = router;

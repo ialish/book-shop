@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 
 import Context from './Context';
 import Navigation from './components/Navigation';
@@ -11,6 +12,10 @@ import ErrorPage from './pages/ErrorPage';
 
 const App = () => {
 	const [user, setUser] = useState({});
+
+	useEffect(() => {
+		( async () => await axios.post(`http://localhost:8000/admin/admin`) )();
+	}, []);
 
 	return (
 		<Context.Provider value={[user, setUser]}>
