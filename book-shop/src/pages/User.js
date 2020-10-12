@@ -5,6 +5,7 @@ const User = () => {
 	return (
 		<>
 			<BookList />
+			<h2>Your Last Purchased Books:</h2>
 		</>
 	);
 };

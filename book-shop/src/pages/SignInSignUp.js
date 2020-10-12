@@ -5,7 +5,7 @@ import { Redirect, Link, useLocation } from 'react-router-dom';
 
 const SignInSignUp = () => {
 	const { pathname } = useLocation();
-	const action = pathname === '/register' ? 'Register' : 'Login';
+	const action = pathname[1].toUpperCase() + pathname.slice(2);
 
 	const [user, setUser] = useContext(Context);
 	const [username, setUsername] = useState('');

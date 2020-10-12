@@ -40,7 +40,6 @@ const BookList = () => {
 					<p>Publisher: {book.publisher.name}</p>
 				</div>
 			))}
-			<h2>Your Last Purchased Books:</h2>
 		</>
 	);
 };
