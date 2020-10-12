@@ -22,10 +22,7 @@ const register = async (req, res) => {
 		const hashedPassword = await bcrypt.hash(password, saltRounds);
 		const user = new User({ username, hashedPassword });
 	
-		user.save(err => {
-			if (err) throw err;
-			return res.json({ message: 'Registered successfully' });
-		});
+		user.save(err => { if (err) throw err });
 
 		const accessToken = jwt.sign(
 			{ username: user.username },
