@@ -1,7 +1,7 @@
 import React from 'react';
 import BookList from '../components/BookList';
 
-const Homepage = () => {
+const Admin = () => {
 	return (
 		<>
 			<BookList />
@@ -9,4 +9,4 @@ const Homepage = () => {
 	);
 };
 
-export default Homepage;
+export default Admin;

@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { Redirect, Link } from 'react-router-dom';
+import Context from '../Context';
+import { Redirect, Link, useLocation } from 'react-router-dom';
 
-const Register = () => {
+const SignInSignUp = () => {
+	const { pathname } = useLocation();
+	const action = pathname === '/register' ? 'Register' : 'Login';
+
+	const [user, setUser] = useContext(Context);
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
-	const [message, setMessage] = useState({});
+	const [errorMsg, setErrorMsg] = useState('');
 	
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		const result = await axios.post('http://localhost:8000/register', {
+		const result = await axios.post(`http://localhost:8000${pathname}`, {
 			username, password
 		});
-		setMessage(result.data);
+		const { error, accessToken } = result.data;
+		
+		if (error) {
+			setErrorMsg(error);
+		} else {
+			setErrorMsg('');
+			setUser({ accessToken });
+		}
 	};
 
 	const handleChange = (event) => {
@@ -23,7 +35,7 @@ const Register = () => {
 
 	return (
 		<>
-			<h1>Register Page</h1>
+			<h1>{action} Page</h1>
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="username">Username: </label>
 				<input type="text" id="username" name="username" value={username}
@@ -31,13 +43,13 @@ const Register = () => {
 				<label htmlFor="password">Password: </label>
 				<input type="password" id="password" name="password" value={password}
 					onChange={handleChange} /><br/>
-				<button type="submit">Register</button>
+				<button type="submit">{action}</button>
 			</form>
-			<h3>{message.error}</h3>
-			{message.message ? <Redirect to='/' /> : null}
+			<h3>{errorMsg}</h3>
+			{user.accessToken ? <Redirect to='/user' /> : null}
 			<Link to='/'>Return Home</Link>
 		</>
 	);
 };
 
-export default Register;
+export default SignInSignUp;

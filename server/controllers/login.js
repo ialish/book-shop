@@ -26,8 +26,10 @@ const login = async (req, res) => {
 			return res.send({ error: 'Data is incorrect' });
 		};
 
-		const user = { username: matchedUser.username };
-		const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+		const accessToken = jwt.sign(
+			{ username: matchedUser.username },
+			process.env.ACCESS_TOKEN_SECRET
+		);
 		return res.send({ accessToken });
 	});
 };

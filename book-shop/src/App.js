@@ -4,8 +4,9 @@ import { Route, Switch } from 'react-router-dom';
 import Context from './Context';
 import Navigation from './components/Navigation';
 import Homepage from './pages/Homepage';
-import Register from './pages/Register';
-import Login from './pages/Login';
+import SignInSignUp from './pages/SignInSignUp';
+import Admin from './pages/Admin';
+import User from './pages/User';
 import ErrorPage from './pages/ErrorPage';
 
 const App = () => {
@@ -16,8 +17,10 @@ const App = () => {
 			<Navigation />
 			<Switch>
 				<Route exact path='/' component={Homepage} />
-				<Route path='/register' component={Register} />
-				<Route path='/login' component={Login} />
+				<Route path='/register' component={SignInSignUp} />
+				<Route path='/login' component={SignInSignUp} />
+				<Route path='/admin' component={Admin} />
+				<Route path='/user' component={User} />
 				<Route component={ErrorPage} />
 			</Switch>
 		</Context.Provider>
