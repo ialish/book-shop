@@ -47,7 +47,7 @@ const createBook = (req, res) => {
 		};
 	});
 
-	res.json({ message: 'Saved successfully' });
+	res.json({ message: 'Created successfully' });
 };
 
 const updateBook = (req, res) => {
