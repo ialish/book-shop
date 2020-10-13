@@ -80,14 +80,24 @@ const deleteBook = (req, res) => {
 	});
 };
 
-const setAdmin = async () => {
+const setAdmin = async (req, res) => {
 	const username = process.env.ADMIN_USERNAME;
-	const password = process.env.ADMIN_PASSWORD;	
-	const saltRounds = 10;
-	const hashedPassword = await bcrypt.hash(password, saltRounds);
-	const user = new User({ username, hashedPassword });
+	const password = process.env.ADMIN_PASSWORD;
+	
+	User.findOne({ username }, async (err, matchedUser) => {
+		if (err) throw err;
 
-	user.save(err => { if (err) throw err });
+		// Check if username already exists
+		if (matchedUser) return;
+		
+		const saltRounds = 10;
+		const hashedPassword = await bcrypt.hash(password, saltRounds);
+		const user = new User({ username, hashedPassword });
+
+		user.save(err => { if (err) throw err });
+	});
+
+	res.sendStatus(200);
 };
 
 module.exports = {

@@ -26,6 +26,7 @@ const booksPurchased = (req, res) => {
 		})
 		.exec((err, book) => {
 			if (err) throw err;
+			
 			res.json(book.purchasedBooks);
 		});
 };

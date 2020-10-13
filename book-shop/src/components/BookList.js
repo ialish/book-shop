@@ -11,7 +11,7 @@ const bookStyle = {
 	cursor: 'pointer'
 };
 
-const BookList = () => {
+const BookList = ({ handleClick }) => {
 	const [books, setBooks] = useState([]);
 	const [searchBox, setSearchBox] = useState('');
 
@@ -34,7 +34,7 @@ const BookList = () => {
 			/><br/>
 			<h3>Press on a book to purchase it.</h3>
 			{books.map(book => (
-				<div key={book._id} style={bookStyle}>
+				<div key={book._id} style={bookStyle} onClick={() => handleClick(book)}>
 					<h2>{book.name}</h2>
 					<h3>by {book.author.name}</h3>
 					<p>Publisher: {book.publisher.name}</p>

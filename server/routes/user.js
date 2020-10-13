@@ -5,6 +5,6 @@ const userController = require('../controllers/user');
 
 router.route('/')
 	.put(userController.savePurchased)
-	.get(userController.booksPurchased);
+	.post(userController.booksPurchased);
 
 module.exports = router;

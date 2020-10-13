@@ -6,6 +6,8 @@ import Context from './Context';
 import Navigation from './components/Navigation';
 import Homepage from './pages/Homepage';
 import SignInSignUp from './pages/SignInSignUp';
+import Logout from './pages/Logout';
+import Auth from './pages/Auth';
 import Admin from './pages/Admin';
 import User from './pages/User';
 import ErrorPage from './pages/ErrorPage';
@@ -24,6 +26,8 @@ const App = () => {
 				<Route exact path='/' component={Homepage} />
 				<Route path='/register' component={SignInSignUp} />
 				<Route path='/login' component={SignInSignUp} />
+				<Route path='/logout' component={Logout} />
+				<Route path='/auth' component={Auth} />
 				<Route path='/admin' component={Admin} />
 				<Route path='/user' component={User} />
 				<Route component={ErrorPage} />

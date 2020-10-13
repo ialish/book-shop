@@ -1,4 +1,6 @@
-const authenticateToken = (req, res, next) => {
+const jwt = require('jsonwebtoken');
+
+const authenticateToken = (req, res) => {
   const auth = req.headers['authorization'];
 	const token = auth && auth.split(' ')[1];
 
@@ -6,10 +8,8 @@ const authenticateToken = (req, res, next) => {
 	
 	jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     if (err) return res.sendStatus(403); // The token is incorrect
-    req.user = user;
+    return res.json({ user });
   });
-
-  next();
 };
 
 module.exports = authenticateToken;
