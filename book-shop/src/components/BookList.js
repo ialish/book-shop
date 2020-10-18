@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const bookStyle = {
@@ -14,6 +15,7 @@ const bookStyle = {
 const BookList = ({ handleClick }) => {
 	const [books, setBooks] = useState([]);
 	const [searchBox, setSearchBox] = useState('');
+	const { pathname } = useLocation();
 
 	useEffect(() => {
 		(async () => {
@@ -31,8 +33,8 @@ const BookList = ({ handleClick }) => {
 				type="search"
 				placeholder="Search Books"
 				onChange={(e) => setSearchBox(e.target.value)}
-			/><br/>
-			<h3>Press on a book to purchase it.</h3>
+			/><br/><br/>
+			{pathname === '/user' ? <h3>Press on a book to purchase it.</h3> : null}
 			{books.map(book => (
 				<div key={book._id} style={bookStyle} onClick={() => handleClick(book)}>
 					<h2>{book.name}</h2>
