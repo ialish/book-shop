@@ -5,7 +5,7 @@ import Context from '../Context';
 
 const Auth = () => {
 	const [user, setUser] = useContext(Context);
-console.log('::', user)
+	
 	useEffect(() => {
 		( async () => {
 			const result = await axios.get(`http://localhost:8000/authenticate`, {
